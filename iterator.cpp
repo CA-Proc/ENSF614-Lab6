@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 class Vector {
 public: 
 
@@ -42,27 +41,33 @@ public:
     //           circulated to the last element of the vector.
 
     int  operator--(int);
-    // PRIMISES: returns the value of the element at the index
+    // PROMISES: returns the value of the element at the index
     //           position, then decrements the index. If
     //           index is less than zero it will be set to the 
     //           last element in the aray. Which means it will be
     //           circulated to the last element of the vector.
 
     int operator *();
-    // PRIMISES: returns the value of the element at the current 
+    // PROMISES: returns the value of the element at the current 
     //           index position.
+
+
+
+
+
+
   };
 
   Vector(int sz); 
   ~Vector();
 
   int & operator[](int i);
-  // PRIMISES: returns existing value in the ith element of 
+  // PROMISES: returns existing value in the ith element of 
   //           array or sets a new value to  the ith element in
   //           array. 
   
 	void ascending_sort();
-  // PRIMISES: sorts the vector values in ascending order. 
+  // PROMISES: sorts the vector values in ascending order. 
 	
 private:
   int *array;               // points to the first element of an array of T
@@ -92,6 +97,47 @@ int Vector::VectIter::operator *()
   return v -> array[index];
 }
 
+int Vector::VectIter::operator ++(){
+  if (index == (v -> size)-1){
+    index = 0;
+  } else {
+    index++;
+  }
+  return v -> array[index];
+}
+
+int Vector::VectIter::operator ++(int){
+  int val = v -> array[index];
+
+  if (index == (v -> size)-1){
+    index = 0;
+  } else {
+    index++;
+  }
+
+  return val;
+}
+
+int Vector::VectIter::operator --(){
+  if (index == 0){
+    index = (v -> size)-1;
+  } else {
+    index--;
+  }
+  return v -> array[index];
+}
+
+int Vector::VectIter::operator --(int){
+  int val = v -> array[index];
+
+  if (index == 0){
+    index = (v -> size)-1;
+  } else {
+    index--;
+  }
+
+  return val;
+}
 
 Vector::VectIter::VectIter(Vector& x)
 {
@@ -133,7 +179,13 @@ int main()
 
  Vector::VectIter iter(x);
 
- cout << "\n\nThe first element of vector x contains: " << *iter; 
+ cout << "\n\nThe first element of vector x contains: " << *iter << endl; 
+
+ 
+ cout << iter++ << endl;
+ cout << iter++ << endl;
+ cout << iter++ << endl;
+ cout << iter++ << endl;
 
  // the code between the  #if 0 and #endif is ignored by
  // compiler. If you change it to #if 1, it will be compiled

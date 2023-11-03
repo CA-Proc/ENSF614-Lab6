@@ -61,6 +61,8 @@ class Mystring {
   //          Othrewise, extends the size of the charsM to s.lengthM+1, and copies 
   //          s into the charsM.
 
+  bool operator>(const Mystring& rhs);
+
   friend std::ostream& operator<<(std::ostream& os, const Mystring& ms);
  private:
 

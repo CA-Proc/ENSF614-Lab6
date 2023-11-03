@@ -109,3 +109,13 @@ std::ostream& operator<<(std::ostream& os, const Mystring& ms){
   os << *ms.charsM;
   return os;
 }
+
+bool Mystring::operator>(const Mystring& rhs){
+
+  if (strcmp(this -> charsM, rhs.charsM) > 0){
+    return true;
+  }
+
+  return false;
+
+}

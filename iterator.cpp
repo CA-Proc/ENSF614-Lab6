@@ -4,6 +4,7 @@
 #include <iostream>
 #include <assert.h>
 #include "mystring2.h"
+#include <cstring>
 
 using namespace std;
 
@@ -71,7 +72,7 @@ public:
   // PROMISES: sorts the vector values in ascending order. 
 	
 private:
-  int *array;               // points to the first element of an array of T
+  T *array;               // points to the first element of an array of T
   int size;               // size of array
   void swap(T&, T&); // swaps the values of two elements in array
 public:
@@ -84,6 +85,16 @@ void Vector<T>::ascending_sort()
 		for(int j=i+1; j < size; j++)
 			if(array[i] > array[j])
 				swap(array[i], array[j]);
+}
+
+template<>
+void Vector<const char*>::ascending_sort()
+{
+ 	for(int i=0; i< size-1; i++)
+		for(int j=i+1; j < size; j++)
+			if(strcmp(array[i],array[j]) > 0)
+				swap(array[i], array[j]); 
+
 }
 
 template <class T>
@@ -112,7 +123,7 @@ T Vector<T>::VectIter::operator ++(){
 
 template <class T>
 T Vector<T>::VectIter::operator ++(int){
-  int val = v -> array[index];
+  T val = v -> array[index];
 
   if (index == (v -> size)-1){
     index = 0;
@@ -135,7 +146,7 @@ T Vector<T>::VectIter::operator --(){
 
 template <class T>
 T Vector<T>::VectIter::operator --(int){
-  int val = v -> array[index];
+  T val = v -> array[index];
 
   if (index == 0){
     index = (v -> size)-1;
@@ -157,7 +168,7 @@ template <class T>
 Vector<T>::Vector(int sz)
 {
   size=sz;
-  array = new T[sz];
+  array = new T [sz];
   assert (array != NULL);
 }
 
@@ -189,12 +200,6 @@ int main()
 
  cout << "\n\nThe first element of vector x contains: " << *iter << endl; 
 
- 
- cout << iter++ << endl;
- cout << iter++ << endl;
- cout << iter++ << endl;
- cout << iter++ << endl;
-
  // the code between the  #if 0 and #endif is ignored by
  // compiler. If you change it to #if 1, it will be compiled
  
@@ -202,6 +207,7 @@ int main()
 	cout << "\nTesting an <int> Vector: " << endl;
 	
 	cout << "\n\nTesting sort";
+  
 	x.ascending_sort();
 	
 	for (int i=0; i<3 ; i++)
@@ -221,7 +227,7 @@ int main()
 	
 	cout << endl;
 	#endif
-  #if 0
+  #if 1
 	cout << "Testing a <Mystring> Vector: " << endl;
 	Vector<Mystring> y(3);
 	y[0] = "Bar";
@@ -252,7 +258,7 @@ int main()
 	Vector<const char*> z(3);
 	z[0] = "Orange";
 	z[1] = "Pear";
-	z[2] = "Apple";;
+	z[2] = "Apple";
 	
 	Vector<const char*>::VectIter iterchar(z);
 	
@@ -263,7 +269,7 @@ int main()
 		cout << endl << iterchar++;
 	
 #endif
-	cout << "\nPrgram Terminated Successfully." << endl;
+	cout << "\nProgram Terminated Successfully." << endl;
 	
 	return 0;
 }

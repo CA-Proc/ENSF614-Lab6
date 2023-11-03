@@ -4,6 +4,7 @@
 
 #ifndef MYSTRING_H
 #define MYSTRING_H
+#include <iostream>
 
 class Mystring {
  public:
@@ -60,6 +61,7 @@ class Mystring {
   //          Othrewise, extends the size of the charsM to s.lengthM+1, and copies 
   //          s into the charsM.
 
+  friend std::ostream& operator<<(std::ostream& os, const Mystring& ms);
  private:
 
   int lengthM; // the string length - number of characters excluding \0

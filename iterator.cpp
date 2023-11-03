@@ -157,7 +157,7 @@ template <class T>
 Vector<T>::Vector(int sz)
 {
   size=sz;
-  array = new T [sz];
+  array = new T[sz];
   assert (array != NULL);
 }
 
@@ -167,6 +167,7 @@ Vector<T>::~Vector()
   delete [] array;
   array = NULL;
 }
+
 
 
 template <class T>
@@ -219,7 +220,8 @@ int main()
 		cout << endl << iter--;
 	
 	cout << endl;
-	
+	#endif
+  #if 0
 	cout << "Testing a <Mystring> Vector: " << endl;
 	Vector<Mystring> y(3);
 	y[0] = "Bar";

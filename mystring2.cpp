@@ -104,3 +104,8 @@ Mystring& Mystring::append(const Mystring& other)
 
     strcpy(charsM, s);
 }
+
+std::ostream& operator<<(std::ostream& os, const Mystring& ms){
+  os << *ms.charsM;
+  return os;
+}
